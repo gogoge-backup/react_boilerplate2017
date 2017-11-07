@@ -10,6 +10,8 @@ import {
   push
 } from 'react-router-redux'
 
+import createSagaMiddleware from 'redux-saga'
+
 export default  function configureStore(preloadedState) {
 
   // for router
@@ -20,11 +22,14 @@ export default  function configureStore(preloadedState) {
 
   // end of router
 
+  const sagaMiddleware = createSagaMiddleware() // for saga
+  
   const store = createStore(
     reducers,
     preloadedState,
     applyMiddleware(
       historyMiddleware,
+      sagaMiddleware,
       // thunkMiddleware,
       // loggerMiddleware
     )
@@ -38,6 +43,7 @@ export default  function configureStore(preloadedState) {
       }
     );
   }
+  store.sagaRun = sagaMiddleware.run
   return { store, history }
 }
 

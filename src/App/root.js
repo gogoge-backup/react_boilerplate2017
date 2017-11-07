@@ -9,8 +9,12 @@ import configureStore from './create-store.js'
 
 import { Route } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
+import sagas from './Sagas/fetch'
 
 const render = (store, history) => {
+  // saga start listen
+  store.sagaRun(sagas)
+
   class Root extends Component {
     render() {
       return (
@@ -37,5 +41,6 @@ const render = (store, history) => {
 // })
 
 const { store, history } = configureStore()
+
 // ------
 render(store, history)

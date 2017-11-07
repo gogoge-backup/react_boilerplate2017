@@ -13,6 +13,9 @@ export default function rootReducer(state = initialState, action) {
       return state.set('value', state.get('value') + action.value)
     case TYPES.DEC: 
       return state.set('value', state.get('value') - action.value)
+    case  'FETCH_POSTS_SUCCESS':
+      console.warn(action.result)
+      return state
     default:
       return state
   }

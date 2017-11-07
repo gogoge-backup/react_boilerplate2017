@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import style from './main.css'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { incCount, decCount } from './action'
+import { incCount, decCount, fetch as fetchPosts } from './action'
 import { push } from 'react-router-redux'
 @connect(
   state => {
@@ -11,7 +11,7 @@ import { push } from 'react-router-redux'
     }
   },
   (dispatch) => (
-    { actions: bindActionCreators({ incCount, decCount, push }, dispatch) }
+    { actions: bindActionCreators({ incCount, decCount, push, fetchPosts }, dispatch) }
   )
 )
 export default class Main extends Component {
@@ -27,6 +27,10 @@ export default class Main extends Component {
     this.props.actions.decCount(3)
   }
 
+  fetch = (e) => {
+    this.props.actions.fetchPosts()
+  }
+
   render() {
     return (
       <div>
@@ -34,6 +38,7 @@ export default class Main extends Component {
       <div styleName="main">{this.props.value}</div>
       <button onClick={this.inc}>+</button>
       <button onClick={this.dec}>-</button>
+      <button onClick={this.fetch}>saga fetch</button>
       <button onClick={this.link}>Go Second</button>
       </div>
     )
