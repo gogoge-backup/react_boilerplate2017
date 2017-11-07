@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import { reducer as main } from '../Containers/Main/'
+import { routerReducer } from 'react-router-redux'
 
-const reducer = combineReducers({
-  main
+const reducers = combineReducers({
+  main,
+  rotuer: routerReducer,
 })
 
-export default reducer
+export default reducers

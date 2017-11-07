@@ -1,11 +1,30 @@
 import { createStore, applyMiddleware } from 'redux'
-import rootReducer from './Reducers/root'
+import reducers from './Reducers/root'
+
+// import createHistory from 'history/createBrowserHistory'
+import createHistory from 'history/createHashHistory'
+
+import { Route } from 'react-router'
+import {
+  routerMiddleware,
+  push
+} from 'react-router-redux'
 
 export default  function configureStore(preloadedState) {
+
+  // for router
+  const history = createHistory()
+
+  // Build the middleware for intercepting and dispatching navigation actions
+  const historyMiddleware = routerMiddleware(history)
+
+  // end of router
+
   const store = createStore(
-    rootReducer,
+    reducers,
     preloadedState,
     applyMiddleware(
+      historyMiddleware,
       // thunkMiddleware,
       // loggerMiddleware
     )
@@ -19,6 +38,6 @@ export default  function configureStore(preloadedState) {
       }
     );
   }
-  return store
+  return { store, history }
 }
 

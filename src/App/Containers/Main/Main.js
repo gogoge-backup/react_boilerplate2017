@@ -3,7 +3,7 @@ import style from './main.css'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { incCount, decCount } from './action'
-
+import { push } from 'react-router-redux'
 @connect(
   state => {
     return {
@@ -11,10 +11,13 @@ import { incCount, decCount } from './action'
     }
   },
   (dispatch) => (
-    { actions: bindActionCreators({ incCount, decCount }, dispatch) }
+    { actions: bindActionCreators({ incCount, decCount, push }, dispatch) }
   )
 )
 export default class Main extends Component {
+  link = () => {
+    this.props.actions.push('/second')
+  }
 
   inc = (e) => {
     this.props.actions.incCount(3)
@@ -27,9 +30,11 @@ export default class Main extends Component {
   render() {
     return (
       <div>
+      <h1>Main</h1>
       <div styleName="main">{this.props.value}</div>
       <button onClick={this.inc}>+</button>
       <button onClick={this.dec}>-</button>
+      <button onClick={this.link}>Go Second</button>
       </div>
     )
   }
