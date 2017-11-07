@@ -1,0 +1,17 @@
+@import "second.css";
+
+:root {
+  --path-t: "./second.css";
+}
+
+.parent {
+  width: 100px;
+  height: 100px;
+  background: red; 
+  font-size: 30px;
+  color: white;
+}
+
+.main {
+  composes: main2 from "./second.css";
+}

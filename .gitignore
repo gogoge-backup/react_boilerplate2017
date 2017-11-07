@@ -1,0 +1,14 @@
+node_modules/
+coverage/
+build/
+dist/
+*.log
+.secret
+cron.json
+yarn.lock
+npm-cache/
+npm-debug*
+.DS_Store
+report/
+*.pdf
+*.csv
